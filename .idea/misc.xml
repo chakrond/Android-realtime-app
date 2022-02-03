@@ -3,9 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/activity_main.xml" value="0.19293478260869565" />
-        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/activity_prompt.xml" value="0.6592039800995025" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/drawable/ic_live.xml" value="0.14375" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/activity_prompt.xml" value="0.4" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_command.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_command_.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_live_.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_plot_.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_selected_plot.xml" value="0.264" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_setting_.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/prompt.xml" value="0.264" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/menu/botton_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/menu/button_menu.xml" value="0.12760416666666666" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15416666666666667" />
       </map>
     </option>

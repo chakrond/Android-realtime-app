@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Live"
+        android:icon="@drawable/ic_live"
+        android:id="@+id/live_Fragment" />
+    <item
+        android:title="Plot"
+        android:icon="@drawable/ic_plot"
+        android:id="@+id/plot_Fragment" />
+    <item
+        android:title="Command"
+        android:icon="@drawable/ic_command"
+        android:id="@+id/command_Fragment" />
+    <item
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"
+        android:id="@+id/setting_Fragment" />
+
+
+</menu>
