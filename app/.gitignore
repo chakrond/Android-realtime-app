@@ -1,2 +1,4 @@
 /build
 /src/main/java/com/example/dataarduino/SECRET.kt
+/src/main/java/com/example/dataarduino/ref/
+/src/main/java/com/example/dataarduino/ref/backup_MainActivity.kt
