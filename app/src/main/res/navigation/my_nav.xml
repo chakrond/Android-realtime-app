@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/live_Fragment"
-        android:name="com.example.dataarduino.Live_Fragment"
+        android:name="com.example.dataarduino.livePlot.LiveFragment"
         android:label="Live plot"
         tools:layout="@layout/fragment_live" />
     <fragment
         android:id="@+id/plot_Fragment"
-        android:name="com.example.dataarduino.Plot_Fragment"
+        android:name="com.example.dataarduino.plot.PlotFragment"
         android:label="Data Plot"
         tools:layout="@layout/fragment_plot" />
     <fragment
         android:id="@+id/setting_Fragment"
-        android:name="com.example.dataarduino.setting_Fragment"
+        android:name="com.example.dataarduino.settings.SettingFragment"
         android:label="Settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/command_Fragment"
-        android:name="com.example.dataarduino.command_Fragment"
+        android:name="com.example.dataarduino.command.CommandFragment"
         android:label="Command"
         tools:layout="@layout/fragment_command_" />
 </navigation>

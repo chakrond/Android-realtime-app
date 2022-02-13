@@ -12,3 +12,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "DataArduino"
 include ':app'
+include ':app:TestModule'

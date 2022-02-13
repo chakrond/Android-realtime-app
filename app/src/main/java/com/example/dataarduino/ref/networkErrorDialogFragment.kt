@@ -48,7 +48,6 @@ class networkErrorDialog: DialogFragment() {
             activity!!.supportFragmentManager.beginTransaction().detach(this).attach(this).commit()
         }
 
-
         return rootView
     }
 }

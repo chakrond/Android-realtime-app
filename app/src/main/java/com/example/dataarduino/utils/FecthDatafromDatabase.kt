@@ -1,4 +1,4 @@
-package com.example.dataarduino
+package com.example.dataarduino.utils
 
 import android.util.Log
 import com.google.gson.Gson
@@ -9,7 +9,6 @@ import io.ktor.client.features.json.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
 import java.util.*
 

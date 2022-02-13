@@ -1,9 +1,8 @@
-package com.example.dataarduino
+package com.example.dataarduino.ref
 
+import com.example.dataarduino.Data
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.formatter.ValueFormatter
-import java.text.SimpleDateFormat
-import java.util.*
 
 class XAxisTimeFormatter: ValueFormatter() {
     override fun getAxisLabel(value: Float, axis: AxisBase?): String {
