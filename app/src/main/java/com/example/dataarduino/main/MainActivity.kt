@@ -6,12 +6,25 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.dataarduino.MyApplication
 import com.example.dataarduino.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
+    // Stores an instance of MainComponent so that its Fragments can access it
+    lateinit var mainComponent: MainComponent
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        // Creates an instance of Registration component by grabbing the factory from the app graph
+        mainComponent = (application as MyApplication).appComponent
+            .mainComponent().create()
+
+        // Injects this activity to the just created Registration component
+        mainComponent.inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

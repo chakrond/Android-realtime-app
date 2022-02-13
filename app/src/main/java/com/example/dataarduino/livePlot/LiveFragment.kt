@@ -14,11 +14,13 @@ import android.widget.EditText
 import androidx.lifecycle.*
 import com.example.dataarduino.MyApplication
 import com.example.dataarduino.R
+import com.example.dataarduino.main.MainActivity
 import com.example.dataarduino.utils.getData
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
 private const val TAG = "LiveFragment"
 
@@ -31,6 +33,18 @@ class LiveFragment : Fragment() {
 //    // Coroutine Scope - OnResume
 //    val job1 = Job()
 //    val RefreshCoroutineScope = CoroutineScope(job1 + Dispatchers.Main)
+
+
+    // @Inject annotated fields will be provided by Dagger
+    @Inject
+    lateinit var livePlotViewModel: LivePlotViewModel
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        // Grabs the registrationComponent from the Activity and injects this Fragment
+        (activity as MainActivity).mainComponent.inject(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +62,7 @@ class LiveFragment : Fragment() {
         chart = viewLayout.findViewById(R.id.samplechart) as LineChart
 
         // ViewModel
-        val livePlotViewModel = ViewModelProvider(requireActivity()).get(LivePlotViewModel::class.java)
+//        val livePlotViewModel = ViewModelProvider(requireActivity()).get(LivePlotViewModel::class.java)
 
         // enable scaling and dragging
         chart.setScaleEnabled(false)
