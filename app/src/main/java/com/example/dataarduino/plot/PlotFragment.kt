@@ -1,60 +1,133 @@
 package com.example.dataarduino.plot
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.lifecycle.Observer
 import com.example.dataarduino.R
+import com.example.dataarduino.main.MainActivity
+import com.example.dataarduino.plot.addPlot.AddPlotFragment
+import com.example.dataarduino.plot.addPlot.AddPlotViewModel
+import com.example.dataarduino.plot.addPlot.SubmitState
+import com.example.dataarduino.plot.addPlot.SubmitSuccess
+import com.example.dataarduino.utils.getData
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val TAG = "PlotFragment"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PlotFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PlotFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    // Line Chart
+    lateinit var chart: LineChart
+
+    @Inject
+    lateinit var addPlotViewModel: AddPlotViewModel
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.d(TAG, "onAttach is called")
+        // Grabs the registrationComponent from the Activity and injects this Fragment
+        (activity as MainActivity).mainComponent.inject(this)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        Log.d(TAG, "onCreate is called")
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d(TAG, "onCreateView is called")
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_plot, container, false)
+        val view = inflater.inflate(R.layout.fragment_plot, container, false)
+
+        setupViews(view)
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Plot_Fragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PlotFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun setupViews(view: View) {
+
+        // Button
+        view.findViewById<Button>(R.id.button_addPlot).setOnClickListener{
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_host, AddPlotFragment())
+                .addToBackStack(AddPlotFragment::class.java.simpleName)
+                .setReorderingAllowed(true)
+                .commit()
+        }
+
+        addPlotViewModel.submitState.observe(viewLifecycleOwner, Observer<SubmitState> { state ->
+            when (state) {
+                is SubmitSuccess -> {
+                    // Chart
+                    chart = view.findViewById(R.id.plot) as LineChart
+
+                    // enable scaling and dragging
+                    chart.setScaleEnabled(false)
+                    chart.isDragEnabled = true
+                    chart.setPinchZoom(true)
+
+                    // no description text
+                    chart.description.isEnabled = false
+
+                    // enable touch gestures
+                    chart.setTouchEnabled(true);
+                    chart.dragDecelerationFrictionCoef = 0.9f
+
+                    // axis Setting
+                    chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+                    chart.axisRight.isEnabled = false
+
+                    // set number of label
+                    chart.xAxis.labelCount = 6
+
+                    // limit the number of visible entries
+//                    chart.setVisibleXRangeMaximum(1000F)
                 }
             }
+        })
+
     }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume is called")
+
+        addPlotViewModel.submitState.observe(viewLifecycleOwner, Observer<SubmitState> { state ->
+            when (state) {
+                is SubmitSuccess -> {
+                    onPlotSubmitted()
+                }
+            }
+        })
+    }
+
+    private fun onPlotSubmitted() {
+        Log.d(TAG, "onPlotSubmitted is called")
+
+        // adding data
+        chart.data = addPlotViewModel.data
+
+        // Axis Formatter
+        chart.xAxis.valueFormatter = IndexAxisValueFormatter(addPlotViewModel.xAxisLabel)
+
+        chart.notifyDataSetChanged()
+        chart.invalidate()
+    }
+
+
 }
+

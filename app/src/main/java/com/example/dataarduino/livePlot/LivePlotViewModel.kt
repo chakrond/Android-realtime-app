@@ -53,8 +53,9 @@ class LivePlotViewModel @Inject constructor(private val dataManager: DataManager
 //    val saveUrl = sharedPreference.saveString("user_url", "")
 //    val useURL = sharedPreference.getString("user_url", "$hostserver/data/real")
 //    val url: String = useURL.toString()
-    val setUrl = dataManager.setHostServerUrl("$hostserver/data/real")
-    val url = dataManager.hostServerUrl
+    val setUrl = dataManager.setHostServerUrl(hostserver)
+    val getUrl = dataManager.hostServerUrl
+    val url = "$getUrl/data/real"
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -85,6 +86,7 @@ class LivePlotViewModel @Inject constructor(private val dataManager: DataManager
                 val jsongetToken = Gson().fromJson(getToken.readText(), JsonObject::class.java)
                 val stringtoken = jsongetToken.get("token").toString()
                 val token = stringtoken.substring(1, stringtoken.length - 1)
+                dataManager.setStorageData("user_token",token)
                 Log.d(TAG, "[coroutineScope] token: $token")
 
 

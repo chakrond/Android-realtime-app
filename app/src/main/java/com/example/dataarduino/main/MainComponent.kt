@@ -5,6 +5,7 @@ import com.example.dataarduino.command.CommandFragment
 import com.example.dataarduino.di.ActivityScope
 import com.example.dataarduino.livePlot.LiveFragment
 import com.example.dataarduino.plot.PlotFragment
+import com.example.dataarduino.plot.addPlot.AddPlotFragment
 import com.example.dataarduino.settings.SettingFragment
 import dagger.Subcomponent
 
@@ -27,5 +28,6 @@ interface MainComponent {
     fun inject(fragment: PlotFragment)
     fun inject(fragment: CommandFragment)
     fun inject(fragment: SettingFragment)
+    fun inject(fragment: AddPlotFragment)
 
 }

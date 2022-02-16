@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.*
 import com.example.dataarduino.MyApplication
 import com.example.dataarduino.R
@@ -41,7 +42,7 @@ class LiveFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
+        Log.d(TAG, "onAttach is called")
         // Grabs the registrationComponent from the Activity and injects this Fragment
         (activity as MainActivity).mainComponent.inject(this)
     }
@@ -58,30 +59,8 @@ class LiveFragment : Fragment() {
         Log.d(TAG, "onCreateView is called")
 
         // View
-        val viewLayout = inflater.inflate(R.layout.fragment_live, container, false)
-        chart = viewLayout.findViewById(R.id.samplechart) as LineChart
-
-        // ViewModel
-//        val livePlotViewModel = ViewModelProvider(requireActivity()).get(LivePlotViewModel::class.java)
-
-        // enable scaling and dragging
-        chart.setScaleEnabled(false)
-        chart.isDragEnabled = true
-        chart.setPinchZoom(true)
-
-        // no description text
-        chart.description.isEnabled = false
-
-        // enable touch gestures
-        chart.setTouchEnabled(true);
-        chart.dragDecelerationFrictionCoef = 0.9f
-
-        // axis Setting
-        chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
-        chart.axisRight.isEnabled = false
-
-        // set number of label
-        chart.xAxis.labelCount = 4
+        val view = inflater.inflate(R.layout.fragment_live, container, false)
+        setupViews(view)
 
         // Create a new coroutine in the lifecycleScope
         viewLifecycleOwner.lifecycleScope.launch {
@@ -94,7 +73,6 @@ class LiveFragment : Fragment() {
                 Log.d(TAG, "[onCreateView] repeatOnLifecycle is called")
                 while (true) {
                     //==========================================================================================
-
                     // adding data
                     chart.data = livePlotViewModel.data
 
@@ -121,8 +99,33 @@ class LiveFragment : Fragment() {
         }
 
         // Inflate the layout for this fragment
-        return viewLayout
+        return view
     }
+
+    private fun setupViews(view: View) {
+        chart = view.findViewById(R.id.livePlot) as LineChart
+
+        // enable scaling and dragging
+        chart.setScaleEnabled(false)
+        chart.isDragEnabled = true
+        chart.setPinchZoom(true)
+
+        // no description text
+        chart.description.isEnabled = false
+
+        // enable touch gestures
+        chart.setTouchEnabled(true);
+        chart.dragDecelerationFrictionCoef = 0.9f
+
+        // axis Setting
+        chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+        chart.axisRight.isEnabled = false
+
+        // set number of label
+        chart.xAxis.labelCount = 4
+    }
+
+
 
     override fun onStart() {
         super.onStart()

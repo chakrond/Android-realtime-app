@@ -8,23 +8,36 @@
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/drawable/ic_live.xml" value="0.14375" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/activity_prompt.xml" value="0.4" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/childfragment_addplot.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_add_plot.xml" value="0.4" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_add_plot_.xml" value="0.11354166666666667" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_command.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_command_.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_live.xml" value="0.264" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_live_.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_plot.xml" value="0.10625" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_plot.xml" value="0.4" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_plot_.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_selected_plot.xml" value="0.264" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_setting_.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_settings.xml" value="0.10625" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_settings.xml" value="0.264" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/prompt.xml" value="0.264" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/test.xml" value="0.8800000000000001" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/menu/botton_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/menu/button_menu.xml" value="0.12760416666666666" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15416666666666667" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dataarduino/ref/backup_LiveFragment.kt" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dataarduino/ref/backup_MainActivity.kt" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dataarduino/ref/LineChartXAxisValueFormatter.kt" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dataarduino/ref/MainActivity_backup.kt" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dataarduino/ref/networkErrorDialogFragment.kt" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dataarduino/ref/SharedPrefsHelper.kt" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dataarduino/ref/XAxisTimeFormatter.kt" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

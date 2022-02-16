@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         // Button Navigation
         val botNav = findViewById<BottomNavigationView>(R.id.BotNavigationView)
-        val navCon = findNavController(R.id.fragmentContainerView)
+        val navCon = findNavController(R.id.fragment_host)
         botNav.setupWithNavController(navCon)
 
 

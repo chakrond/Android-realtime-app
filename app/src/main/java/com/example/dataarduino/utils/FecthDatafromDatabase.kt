@@ -64,7 +64,7 @@ object getData {
         xAxisLabel.add(SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(RTrecTime))
 
         Log.d("FetchDatabase", "Date: $RTrecTime")
-        Log.d("FetchDatabase", "mills: $mills")
+//        Log.d("FetchDatabase", "mills: $mills")
         Log.d("FetchDatabase", "xAxisLabel: $xAxisLabel")
 
     }
