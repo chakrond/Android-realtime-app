@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import com.example.dataarduino.R
 import com.example.dataarduino.main.MainActivity
@@ -69,12 +70,19 @@ class PlotFragment : Fragment() {
                 .commit()
         }
 
+        // TextView
+        val chartName = view.findViewById<TextView>(R.id.textView_chartName)
+        addPlotViewModel.chartName.observe(viewLifecycleOwner, Observer<String> { string ->
+            chartName.text = string
+        })
+
+
         addPlotViewModel.submitState.observe(viewLifecycleOwner, Observer<SubmitState> { state ->
             when (state) {
                 is SubmitSuccess -> {
+
                     // Chart
                     chart = view.findViewById(R.id.plot) as LineChart
-
                     // enable scaling and dragging
                     chart.setScaleEnabled(false)
                     chart.isDragEnabled = true
@@ -118,13 +126,21 @@ class PlotFragment : Fragment() {
     private fun onPlotSubmitted() {
         Log.d(TAG, "onPlotSubmitted is called")
 
+//        if (::chart.isInitialized) {
+//            chart.lineData.clearValues()
+//        }
+//        if (chart.getData() != null) {
+//            chart.data.clearValues()
+//            chart.invalidate()
+//        }
+
         // adding data
         chart.data = addPlotViewModel.data
 
         // Axis Formatter
         chart.xAxis.valueFormatter = IndexAxisValueFormatter(addPlotViewModel.xAxisLabel)
 
-        chart.notifyDataSetChanged()
+//        chart.notifyDataSetChanged()
         chart.invalidate()
     }
 

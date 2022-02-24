@@ -15,7 +15,7 @@
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_command_.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_live.xml" value="0.264" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_live_.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_plot.xml" value="0.4" />
+        <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_plot.xml" value="0.5078043704474505" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_plot_.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_selected_plot.xml" value="0.264" />
         <entry key="..\:/Users/Chakron.D/AndroidStudioProjects/DataArduino/app/src/main/res/layout/fragment_setting_.xml" value="0.25416666666666665" />
@@ -30,9 +30,7 @@
   </component>
   <component name="ProjectPlainTextFileTypeManager">
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dataarduino/ref/backup_LiveFragment.kt" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dataarduino/ref/backup_MainActivity.kt" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dataarduino/ref/LineChartXAxisValueFormatter.kt" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dataarduino/ref/MainActivity_backup.kt" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dataarduino/ref/networkErrorDialogFragment.kt" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dataarduino/ref/SharedPrefsHelper.kt" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/dataarduino/ref/XAxisTimeFormatter.kt" />

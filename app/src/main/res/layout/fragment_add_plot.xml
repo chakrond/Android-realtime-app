@@ -7,22 +7,71 @@
     tools:context=".plot.addPlot.AddPlotFragment">
 
 
+    <CheckBox
+        android:id="@+id/checkBox_temperature2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:text="Temperature"
+        app:layout_constraintStart_toEndOf="@+id/checkBox_humidity2"
+        app:layout_constraintTop_toBottomOf="@+id/textView_dateEnd" />
+
+    <CheckBox
+        android:id="@+id/checkBox_humidity2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="20dp"
+        android:text="Humidity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_dateEnd" />
+
     <TextView
         android:id="@+id/textView_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:text="@string/date"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_singleData" />
 
+    <EditText
+        android:id="@+id/editText_singleDate"
+        android:layout_width="190dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/eg_2022_01_16_2022_01_2022"
+        android:inputType="date"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox_temperature"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.319"
+        app:layout_constraintStart_toEndOf="@+id/textView_date"
+        app:layout_constraintTop_toBottomOf="@+id/textView_singleData"
+        app:layout_constraintVertical_bias="0.692" />
+
+    <Switch
+        android:id="@+id/switch_addmode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:minHeight="48dp"
+        android:text="ADD MODE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.964"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView_rangeQuery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:text="@string/range_query_from_date_to_date"
         android:textSize="20sp"
@@ -56,30 +105,13 @@
         android:id="@+id/textView_singleData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:text="@string/single_day_month_year"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editText_singleDate"
-        android:layout_width="190dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="@string/eg_2022_01_16_2022_01_2022"
-        android:inputType="date"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView_rangeQuery"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.215"
-        app:layout_constraintStart_toEndOf="@+id/textView_date"
-        app:layout_constraintTop_toBottomOf="@+id/textView_singleData"
-        app:layout_constraintVertical_bias="0.0"
-        android:autofillHints="" />
 
     <EditText
         android:id="@+id/editTextDate_dateStart"
@@ -100,35 +132,58 @@
         android:layout_width="190dp"
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/eg_2022_02_01"
         android:inputType="date"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toEndOf="@+id/textView_dateEnd"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate_dateStart"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDate_dateStart" />
 
     <Button
         android:id="@+id/button_submitRangQ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:text="@string/submit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.416"
+        app:layout_constraintStart_toEndOf="@+id/checkBox_temperature2"
         app:layout_constraintTop_toBottomOf="@+id/textView_dateEnd" />
 
     <Button
         android:id="@+id/button_submitSingle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:text="@string/submit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.309"
+        app:layout_constraintStart_toEndOf="@+id/checkBox_temperature"
+        app:layout_constraintTop_toBottomOf="@+id/textView_date" />
+
+    <CheckBox
+        android:id="@+id/checkBox_humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="Humidity"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_date" />
+
+    <CheckBox
+        android:id="@+id/checkBox_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Temperature"
+        app:layout_constraintStart_toEndOf="@+id/checkBox_humidity"
         app:layout_constraintTop_toBottomOf="@+id/textView_date" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

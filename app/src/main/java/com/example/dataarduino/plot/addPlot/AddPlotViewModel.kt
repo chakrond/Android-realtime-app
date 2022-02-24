@@ -43,6 +43,7 @@ class AddPlotViewModel @Inject constructor(private val dataManager: DataManager)
     val hEntry = ArrayList<Entry>()
     val tEntry = ArrayList<Entry>()
 
+    // Button Status
     private val _submitState = MutableLiveData<SubmitState>()
     val submitState: LiveData<SubmitState>
         get() = _submitState
@@ -54,6 +55,47 @@ class AddPlotViewModel @Inject constructor(private val dataManager: DataManager)
 //            _submitState.value = SubmitError
 //        }
         _submitState.value = SubmitSuccess
+    }
+
+    // CheckBox Status
+    private val _humidityCheckBoxState = MutableLiveData<CheckboxState>()
+    val humidityCheckBoxState: LiveData<CheckboxState>
+        get() = _humidityCheckBoxState
+
+    private val _temperatureCheckBoxState = MutableLiveData<CheckboxState>()
+    val temperatureCheckBoxState: LiveData<CheckboxState>
+        get() = _temperatureCheckBoxState
+
+    fun humidityChecked() {
+        _humidityCheckBoxState.value = HumidityChecked
+    }
+
+    fun temperatureChecked() {
+        _temperatureCheckBoxState.value = TemperatureChecked
+    }
+
+    // Chart Name
+    private val _chartName = MutableLiveData<String>()
+    val chartName: LiveData<String>
+    get() = _chartName
+
+    fun setChartName(name: String) {
+        _chartName.value = name
+    }
+
+    // AddMode Switch
+    private val _addModeSwitch = MutableLiveData<SwitchState>()
+    val addModeSwitch: LiveData<SwitchState>
+    get() = _addModeSwitch
+
+    fun onAddMode() {
+        _addModeSwitch.value = AddModeChecked
+//        Log.d("AddMode", "AddModeChecked")
+    }
+
+    fun offAddMode() {
+        _addModeSwitch.value = AddModeUnchecked
+//        Log.d("AddMode", "AddModeUnchecked")
     }
 
     // Connect to Database
@@ -132,9 +174,8 @@ class AddPlotViewModel @Inject constructor(private val dataManager: DataManager)
             humidityArray = jsonObject.getAsJsonArray("Humidity")
             temperatureArray = jsonObject.getAsJsonArray("Temperature")
 //            Log.d(TAG, "TemperatureArray: $temperatureArray")
-            formatData()
-            checkSubmitStat()
         }
+
     }
 
     fun formatData() {
@@ -144,11 +185,18 @@ class AddPlotViewModel @Inject constructor(private val dataManager: DataManager)
         humidArrayList = Gson().fromJson(humidityArray, ArrayList<Float>()::class.java)
         tempArrayList = Gson().fromJson(temperatureArray, ArrayList<Float>()::class.java)
 
+        hEntry.clear()
+        tEntry.clear()
         var y = 0F
         for ((i, a) in humidArrayList.withIndex()) {
 
-            hEntry.add(Entry(y, humidArrayList[i]))
-            tEntry.add(Entry(y, tempArrayList[i]))
+            if (_humidityCheckBoxState.value == HumidityChecked) {
+                hEntry.add(Entry(y, humidArrayList[i]))
+            }
+
+            if (_temperatureCheckBoxState.value == TemperatureChecked) {
+                tEntry.add(Entry(y, tempArrayList[i]))
+            }
 
             // Format time
             // Date Formatter
@@ -168,27 +216,114 @@ class AddPlotViewModel @Inject constructor(private val dataManager: DataManager)
     // Line Data
     var data = LineData()
 
+    // Counter
+    var iH = 0
+    var iT = 0
+
+    // Array Dataset
+    var arraySetH = ArrayList<LineDataSet>()
+    var arraySetT = ArrayList<LineDataSet>()
+
+    // data Set
+    val dataSetsAddMode = ArrayList<ILineDataSet>()
+
     fun createLineData() {
 
-        // data Set
-        val dataSets = ArrayList<ILineDataSet>()
+        if (_addModeSwitch.value == AddModeUnchecked) {
 
-        // Humidity
-        val set1 = LineDataSet(hEntry, "Humidity")
-        set1.fillAlpha = 110
+            // data Set
+            val dataSets = ArrayList<ILineDataSet>()
 
-        // Temperature
-        val set2 = LineDataSet(tEntry, "Temperature")
-        set2.fillAlpha = 110
-        // black lines and points
-        set2.color = Color.RED;
-        set2.setCircleColor(Color.RED);
+            // Humidity
+            if (_humidityCheckBoxState.value == HumidityChecked) {
+                val set1 = LineDataSet(hEntry, "Humidity")
+                set1.fillAlpha = 110
+//            Log.d(TAG, "set1: $set1")
+                dataSets.add(set1)
+            }
 
-        // data Set
-        dataSets.add(set1)
-        dataSets.add(set2)
-        data = LineData(dataSets)
+            // Temperature
+            if (_temperatureCheckBoxState.value == TemperatureChecked) {
+                val set2 = LineDataSet(tEntry, "Temperature")
+                set2.fillAlpha = 110
+                // black lines and points
+                set2.color = Color.RED
+                set2.setCircleColor(Color.RED)
+//        Log.d(TAG, "set2: $set2")
+                dataSets.add(set2)
+            }
+
+            data = LineData(dataSets)
+        }
+
+        if (_addModeSwitch.value == AddModeChecked) {
+
+            if (_humidityCheckBoxState.value == HumidityChecked) {
+                val setA = LineDataSet(hEntry, "Humidity")
+
+                setA.fillAlpha = 110
+
+                when (iH) {
+                    0 -> {
+                        setA.color = Color.RED
+                        setA.setCircleColor(Color.RED)
+                    }
+                    1 -> {
+                        setA.color = Color.BLUE
+                        setA.setCircleColor(Color.BLUE)
+                    }
+                    2 -> {
+                        setA.color = Color.GREEN
+                        setA.setCircleColor(Color.GREEN)
+                    }
+
+                }
+
+                arraySetH.add(setA)
+                dataSetsAddMode.add(arraySetH[iH])
+                iH++
+            }
+
+            if (_temperatureCheckBoxState.value == TemperatureChecked) {
+                val setB = LineDataSet(tEntry, "Temperature")
+                Log.d("TestMode", "tEntry: $tEntry")
+                Log.d("TestMode", "setB: $setB")
+
+                setB.fillAlpha = 110
+                setB.setDrawCircles(false)
+
+                when (iT) {
+                    0 -> {
+                        setB.color = Color.RED
+//                        setB.setCircleColor(Color.RED)
+                    }
+                    1 -> {
+                        setB.color = Color.BLUE
+//                        setB.setCircleColor(Color.BLUE)
+                    }
+                    2 -> {
+                        setB.color = Color.GREEN
+//                        setB.setCircleColor(Color.GREEN)
+                    }
+
+                }
+
+                arraySetT.add(setB)
+                dataSetsAddMode.add(arraySetT[iT])
+                iT++
+            }
+
+            data = LineData(dataSetsAddMode)
+        }
+
+        // Reset status
+        _humidityCheckBoxState.value = Unchecked
+        _temperatureCheckBoxState.value = Unchecked
     }
+
+
+
+
 
 
 }

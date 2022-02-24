@@ -12,12 +12,13 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="date">Date:</string>
-    <string name="range_query_from_date_to_date">Range Query [from date to date]</string>
+    <string name="range_query_from_date_to_date">Range Query</string>
     <string name="datestart">DateStart:</string>
     <string name="dateend">DateEnd:</string>
-    <string name="single_day_month_year">Single [day, month, year]</string>
+    <string name="single_day_month_year">Single Query</string>
     <string name="eg_2022_01_16_2022_01_2022">eg. 2022-01-16, 2022-01, 2022</string>
     <string name="eg_2022_01_16">eg. 2022-01-16</string>
     <string name="eg_2022_02_01">eg. 2022-02-01</string>
     <string name="submit">submit</string>
+    <string name="chart_name">Chart Name</string>
 </resources>
