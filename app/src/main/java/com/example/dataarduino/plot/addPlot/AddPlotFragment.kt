@@ -75,6 +75,13 @@ class AddPlotFragment : Fragment() {
             addPlotViewModel.setDateQuery(dateQuery)
             addPlotViewModel.getSingleQueryData("date")
             addPlotViewModel.setChartName(dateQuery)
+            onAddModeChecked(addModeSwitch)
+            onCheckboxClicked(humidityCheckbox1)
+            onCheckboxClicked(temperatureCheckbox1)
+            addPlotViewModel.formatData()
+            addPlotViewModel.createLineData()
+
+            // Update submit status
             addPlotViewModel.checkSubmitStat()
 
             addPlotViewModel.submitState.observe(viewLifecycleOwner, Observer<SubmitState> { state ->
@@ -85,12 +92,6 @@ class AddPlotFragment : Fragment() {
                             .addToBackStack(PlotFragment::class.java.simpleName)
                             .setReorderingAllowed(true)
                             .commit()
-
-                        onAddModeChecked(addModeSwitch)
-                        onCheckboxClicked(humidityCheckbox1)
-                        onCheckboxClicked(temperatureCheckbox1)
-                        addPlotViewModel.formatData()
-                        addPlotViewModel.createLineData()
                     }
 //                    is SubmitError -> errorTextView.visibility = View.VISIBLE
                 }

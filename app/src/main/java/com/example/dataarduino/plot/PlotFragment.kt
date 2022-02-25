@@ -12,10 +12,7 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import com.example.dataarduino.R
 import com.example.dataarduino.main.MainActivity
-import com.example.dataarduino.plot.addPlot.AddPlotFragment
-import com.example.dataarduino.plot.addPlot.AddPlotViewModel
-import com.example.dataarduino.plot.addPlot.SubmitState
-import com.example.dataarduino.plot.addPlot.SubmitSuccess
+import com.example.dataarduino.plot.addPlot.*
 import com.example.dataarduino.utils.getData
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
@@ -134,14 +131,38 @@ class PlotFragment : Fragment() {
 //            chart.invalidate()
 //        }
 
-        // adding data
-        chart.data = addPlotViewModel.data
+        addPlotViewModel.addModeSwitch.observe(viewLifecycleOwner, Observer { state ->
+            when (state) {
+                is AddModeUnchecked -> {
+                    // adding data
+                    chart.data = addPlotViewModel.data
 
-        // Axis Formatter
-        chart.xAxis.valueFormatter = IndexAxisValueFormatter(addPlotViewModel.xAxisLabel)
+                    // Axis Formatter
+                    chart.xAxis.valueFormatter = IndexAxisValueFormatter(addPlotViewModel.xAxisLabel)
+                    chart.invalidate()
+                    // chart.notifyDataSetChanged()
+                }
+            }
+        })
 
-//        chart.notifyDataSetChanged()
-        chart.invalidate()
+        addPlotViewModel.addModeSwitch.observe(viewLifecycleOwner, Observer { state ->
+            when (state) {
+                is AddModeChecked -> {
+
+                    if (chart.getData() != null) {
+                        chart.data.clearValues()
+                        chart.invalidate()
+                    }
+
+                    // adding data
+                    chart.data = addPlotViewModel.data
+
+                    // chart.invalidate()
+                    // chart.notifyDataSetChanged()
+                }
+            }
+        })
+
     }
 
 

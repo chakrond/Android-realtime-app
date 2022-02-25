@@ -26,6 +26,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -139,8 +140,7 @@ class AddPlotViewModel @Inject constructor(private val dataManager: DataManager)
 
         // Clear Array
 
-
-        viewModelScope.launch {
+        runBlocking {
 
             // Get record data
             val client3 = HttpClient(CIO) {
@@ -187,29 +187,57 @@ class AddPlotViewModel @Inject constructor(private val dataManager: DataManager)
 
         hEntry.clear()
         tEntry.clear()
-        var y = 0F
-        for ((i, a) in humidArrayList.withIndex()) {
 
-            if (_humidityCheckBoxState.value == HumidityChecked) {
-                hEntry.add(Entry(y, humidArrayList[i]))
-            }
+        if (_addModeSwitch.value == AddModeUnchecked) {
 
-            if (_temperatureCheckBoxState.value == TemperatureChecked) {
-                tEntry.add(Entry(y, tempArrayList[i]))
+            var y = 0F
+            for ((i, a) in humidArrayList.withIndex()) {
+
+                if (_humidityCheckBoxState.value == HumidityChecked) {
+                    hEntry.add(Entry(y, humidArrayList[i]))
+                }
+
+                if (_temperatureCheckBoxState.value == TemperatureChecked) {
+                    tEntry.add(Entry(y, tempArrayList[i]))
+                }
+
+                // Format time
+                // Date Formatter
+                val originalPattern = "yyyy-mm-dd'T'HH:mm:ss"
+                val formatter1 = SimpleDateFormat(originalPattern)
+                val RTrecTime = formatter1.parse(recTimeArrayList[i])
+                xAxisLabel.add(SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(RTrecTime))
+                y++
             }
+            //        Log.d(TAG, "hEntry: $hEntry")
+            //        Log.d(TAG, "tEntry: $tEntry")
+            //        Log.d(TAG, "xAxisLabel: $xAxisLabel")
+        }
+
+        if (_addModeSwitch.value == AddModeChecked) {
 
             // Format time
             // Date Formatter
             val originalPattern = "yyyy-mm-dd'T'HH:mm:ss"
             val formatter1 = SimpleDateFormat(originalPattern)
-            val RTrecTime = formatter1.parse(recTimeArrayList[i])
-            xAxisLabel.add(SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(RTrecTime))
-            y++
-        }
+            val reqRecTime: Date? = formatter1.parse(_chartName.value + "T00:00:00")
+            val millReqRecTime: Long? = reqRecTime?.time
 
-//        Log.d(TAG, "hEntry: $hEntry")
-//        Log.d(TAG, "tEntry: $tEntry")
-//        Log.d(TAG, "xAxisLabel: $xAxisLabel")
+            for ((i, a) in humidArrayList.withIndex()) {
+
+                val RTrecTime = formatter1.parse(recTimeArrayList[i])
+                val mills: Long = RTrecTime.time - millReqRecTime!!
+
+
+                if (_humidityCheckBoxState.value == HumidityChecked) {
+                    hEntry.add(Entry(mills.toFloat(), humidArrayList[i]))
+                }
+
+                if (_temperatureCheckBoxState.value == TemperatureChecked) {
+                    tEntry.add(Entry(mills.toFloat(), tempArrayList[i]))
+                }
+            }
+        }
 
     }
 
@@ -221,15 +249,17 @@ class AddPlotViewModel @Inject constructor(private val dataManager: DataManager)
     var iT = 0
 
     // Array Dataset
-    var arraySetH = ArrayList<LineDataSet>()
-    var arraySetT = ArrayList<LineDataSet>()
+    val arraySetH = ArrayList<LineDataSet>()
+    val arraySetT = ArrayList<LineDataSet>()
 
     // data Set
-    val dataSetsAddMode = ArrayList<ILineDataSet>()
+    var dataSetsAddMode = ArrayList<ILineDataSet>()
 
     fun createLineData() {
 
         if (_addModeSwitch.value == AddModeUnchecked) {
+
+            Log.d("createLineData", "AddModeUnchecked")
 
             // data Set
             val dataSets = ArrayList<ILineDataSet>()
@@ -249,7 +279,7 @@ class AddPlotViewModel @Inject constructor(private val dataManager: DataManager)
                 // black lines and points
                 set2.color = Color.RED
                 set2.setCircleColor(Color.RED)
-//        Log.d(TAG, "set2: $set2")
+//                Log.d(TAG, "set2: $set2")
                 dataSets.add(set2)
             }
 
@@ -276,7 +306,6 @@ class AddPlotViewModel @Inject constructor(private val dataManager: DataManager)
                         setA.color = Color.GREEN
                         setA.setCircleColor(Color.GREEN)
                     }
-
                 }
 
                 arraySetH.add(setA)
@@ -286,8 +315,8 @@ class AddPlotViewModel @Inject constructor(private val dataManager: DataManager)
 
             if (_temperatureCheckBoxState.value == TemperatureChecked) {
                 val setB = LineDataSet(tEntry, "Temperature")
-                Log.d("TestMode", "tEntry: $tEntry")
-                Log.d("TestMode", "setB: $setB")
+//                Log.d("TestMode", "tEntry: $tEntry")
+//                Log.d("TestMode", "setB: $setB")
 
                 setB.fillAlpha = 110
                 setB.setDrawCircles(false)
@@ -305,23 +334,30 @@ class AddPlotViewModel @Inject constructor(private val dataManager: DataManager)
                         setB.color = Color.GREEN
 //                        setB.setCircleColor(Color.GREEN)
                     }
-
                 }
 
-                arraySetT.add(setB)
-                dataSetsAddMode.add(arraySetT[iT])
+                dataSetsAddMode.add(setB) // **something wrong with this line
+
+                for ((i,a) in dataSetsAddMode.withIndex()) {
+                    Log.d("dataSetsAddMode", "dataSetsAddMode[$i]: $a}")
+                }
+
                 iT++
             }
 
             data = LineData(dataSetsAddMode)
         }
 
+        resetCheckBoxStat()
+    }
+
+    fun resetCheckBoxStat() {
+
         // Reset status
         _humidityCheckBoxState.value = Unchecked
         _temperatureCheckBoxState.value = Unchecked
+
     }
-
-
 
 
 
